@@ -14,7 +14,7 @@ contract Vote {
     // candidates stuff
     Candidate[] public Candidates;
     
-    constructor() public {
+    constructor () public {
         owner = msg.sender;
     }
     
@@ -59,13 +59,15 @@ contract Vote {
     
     event newCandidate(string name, Party party);
     
-    function addCandidate (string name, Party party) onlyOwner public returns (uint cadidateCount) {
+    event newVote(string name, uint voteCount);
+    
+    function addCandidate (string name, Party party) onlyOwner public returns (uint candidateCount) {
         Candidate memory candidate;
         // bytes32
         candidate.name = name;
         // enum
         candidate.party = party;
-        candidate.votes = 0;
+        candidate.votes = 0; 
         
         Candidates.push(candidate);
         candidateIndex[name] == Candidates.length - 1;
@@ -87,9 +89,12 @@ contract Vote {
         uint index = candidateIndex[candidate];
        Candidates[index].votes++;
         voters[msg.sender].hasVoted = true;
+        emit newVote(candidate, Candidates[index].votes);
+        
+        return true;
     }
     
-    function getVotes(uint index) public returns (uint) {
+    function getVotes(uint index) public view returns (uint) {
         return Candidates[index].votes;
     }
     
