@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import VoteContract from '../build/contracts/Vote.json'
 import getWeb3 from './utils/getWeb3'
-import Navbar from './components/Navbar/Navbar'
 import Vote from './components/Vote/Vote'
+import {Grid, Header} from 'semantic-ui-react'
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -39,7 +39,7 @@ class App extends Component {
           candidates[index].total = number.toNumber();
           this.setState(candidates);
         }))
-    }, 5000)
+    }, 1000)
   }
 
   componentWillMount() {
@@ -105,9 +105,35 @@ class App extends Component {
       <div className="App">
         <main className="container">
           <Vote candidates={this.state.candidates} func={this.getVote}/>
+
+          <Grid container divided='vertically' textAlign='center'>
+            <Grid.Row columns={3}>
+              {this
+                .state
+                .candidates
+                .map(candidate => {
+                  return (
+                    <Grid.Column>{candidate.name}
+                      <div>Votes: {candidate.total}</div>
+                    </Grid.Column>
+                  )
+                })}
+            </Grid.Row>
+
+          </Grid>
+          <Grid centered textAlign='center' columns={2}>
+            <Grid.Column>
+              {this.state.tx
+                ? <div>
+                    <Header size='large'>Transaction Id: {this.state.tx}</Header>
+                  </div>
+                : null
+}
+            </Grid.Column>
+          </Grid>
         </main>
       </div>
-    );
+    )
   }
 }
 
