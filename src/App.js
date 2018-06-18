@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import VoteContract from '../build/contracts/Vote.json'
 import getWeb3 from './utils/getWeb3'
-import Navbar from './components/Navbar/Navbar'
 import Vote from './components/Vote/Vote'
 
 import './css/oswald.css'
@@ -83,6 +82,13 @@ class App extends Component {
   }
 
   getVote = (name) => {
+    const candArr = this.state.candidates;
+    let candId = 0
+    for (let i = 0; i < candArr.length; i++) {
+      if (name === candArr[i].name) {
+        candId = Number(i)
+      }
+    }
     const address = this.state.web3.eth.accounts[0]
     this
       .state
@@ -98,8 +104,6 @@ class App extends Component {
     console.log(this.state.candidates)
     return (
       <div className="App">
-        <Navbar/>
-
         <main className="container">
           <Vote candidates={this.state.candidates} func={this.getVote}/>
         </main>

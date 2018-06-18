@@ -84,12 +84,10 @@ contract Vote {
         return true;
     }
     
-    function castVote (string candidate) public isVoter returns (bool) {
-        //  Cadvotes++;
-        uint index = candidateIndex[candidate];
+    function castVote (uint index) public isVoter returns (bool) {
        Candidates[index].votes++;
         voters[msg.sender].hasVoted = true;
-        emit newVote(candidate, Candidates[index].votes);
+        emit newVote(Candidates[index].name, Candidates[index].votes);
         
         return true;
     }
