@@ -33,9 +33,9 @@ contract Vote {
     
     // voters stuff
     //address where every address is id and value is bool
-    mapping(address => Voter) private voters;
+    mapping(address => Voter) internal voters;
     
-    mapping(string => uint) private candidateIndex;
+    mapping(string => uint) internal candidateIndex;
         
     modifier isUnregistered(address account) {
         require(
@@ -94,7 +94,8 @@ contract Vote {
         return true;
     }
     
-    function getVotes(uint index) public view returns (uint) {
+    function getVotes(string candidate) public view returns (uint) {
+        uint index = candidateIndex[candidate];
         return Candidates[index].votes;
     }
     
