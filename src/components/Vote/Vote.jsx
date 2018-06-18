@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Grid, Form, Button, Header, Image } from 'semantic-ui-react';
 
+const parties = [
+  'Democrat',
+  'Republican',
+  'Green',
+  'Libertarian',
+  'Independent'
+];
+
 export default class Vote extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +48,7 @@ export default class Vote extends Component {
                   {this.props.candidates.map(candidate => {
                     return (
                       <option key={candidate.name} value={candidate.name}>
-                        {candidate.name}
+                        {candidate.name} -- Party: {parties[candidate.party]}
                       </option>
                     );
                   })}
