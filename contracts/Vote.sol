@@ -33,9 +33,9 @@ contract Vote {
     
     // voters stuff
     //address where every address is id and value is bool
-    mapping(address => Voter) internal voters;
+    mapping(address => Voter) private voters;
     
-    mapping(string => uint) internal candidateIndex;
+    mapping(string => uint) private candidateIndex;
         
     modifier isUnregistered(address account) {
         require(
@@ -84,10 +84,12 @@ contract Vote {
         return true;
     }
     
-    function castVote (uint index) public isVoter returns (bool) {
+    function castVote (string candidate) public isVoter returns (bool) {
+        //  Cadvotes++;
+        uint index = candidateIndex[candidate];
        Candidates[index].votes++;
         voters[msg.sender].hasVoted = true;
-        emit newVote(Candidates[index].name, Candidates[index].votes);
+        emit newVote(candidate, Candidates[index].votes);
         
         return true;
     }
