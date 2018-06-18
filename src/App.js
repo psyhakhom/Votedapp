@@ -16,6 +16,7 @@ class App extends Component {
     this.state = {
       voteContract: null,
       candidates: [],
+      tx: null,
       web3: null
     }
   }
@@ -91,15 +92,17 @@ class App extends Component {
         from: address,
         gas: 100000
       })
-      .then(result => console.log(result))
+      .then(result => {
+        this.setState({tx: result.tx})
+        console.log(result)
+      })
   }
 
   render() {
     console.log(this.state.candidates)
+    console.log('tx', this.state.tx)
     return (
       <div className="App">
-        <Navbar/>
-
         <main className="container">
           <Vote candidates={this.state.candidates} func={this.getVote}/>
         </main>
