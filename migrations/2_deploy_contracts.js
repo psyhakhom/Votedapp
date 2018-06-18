@@ -1,17 +1,19 @@
-var Voting = artifacts.require("./Vote.sol");
+var Voting = artifacts.require('./Vote.sol');
 
 let candidates = [
   {
     name: 'Ian Wang',
     party: 0
-  }, {
-    name: 'Michale Mcdevitt',
+  },
+  {
+    name: 'Michael Mcdevitt',
     party: 1
-  }, {
+  },
+  {
     name: 'Kenneth Zhu',
     party: 2
   }
-]
+];
 
 let voters = [
   '0x33f1861d475fF7CB06C533566938Af17885E1C12',
@@ -24,17 +26,15 @@ let voters = [
   '0x8719CeEFfb4ADBC29Ea8BA61c060915b306F4e4b',
   '0x955Aa476BCc43effD951Ffd5116FECd718E7FeD1',
   '0x2Bf59793D08f61A65D42dbCAF14D355E889aface'
-]
+];
 
-module.exports = function (deployer) {
-  deployer
-    .deploy(Voting)
-    .then(contract => {
-      candidates.map(candidate => {
-        contract.addCandidate(candidate.name, candidate.party)
-      })
-      voters.map(voter => {
-        contract.registerVoter(voter)
-      })
-    })
-}
+module.exports = function(deployer) {
+  deployer.deploy(Voting).then(contract => {
+    candidates.map(candidate => {
+      contract.addCandidate(candidate.name, candidate.party);
+    });
+    voters.map(voter => {
+      contract.registerVoter(voter);
+    });
+  });
+};
