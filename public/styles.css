@@ -1,0 +1,22 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+}
+
+.ui.header {
+	font-family: 'Roboto', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.ui.huge.header {
+	font-size: 5em;
+}
+
+img {
+	width: 100%;
+}
+
+.img-container {
+	width: 300px;
+}
